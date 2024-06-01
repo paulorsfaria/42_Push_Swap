@@ -46,7 +46,7 @@ int	main(int argc, char *argv[])
 		ft_update_index(a);
 		ft_update_index(b);
 		ft_sort(&a, &b);
-		//print_list(a);
+	//	print_list(a);
 		ft_free_stack(&a);
 	}
 }

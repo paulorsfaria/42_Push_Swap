@@ -195,9 +195,20 @@ int	ft_check_true_rev_sort(t_list **lst)
 		return (-1);
 	return (1);
 }
+int ft_get_last(t_list **a)
+{
+	t_list *temp;
+	temp = *a;
+	while (temp->next)
+		temp=temp->next;
+	return (temp->content);
+
+}
 
 void	ft_over_five(t_list **a, t_list **b, int flag)
 {
+	int last_nbr;
+	last_nbr = INT_MIN;
 
 	if (flag == 1)
 	{
@@ -205,9 +216,11 @@ void	ft_over_five(t_list **a, t_list **b, int flag)
 		pa_pb(a, b, 'b');
 	}
 	ft_prepare_for_push(a, b);
-	if (ft_listsize(*a) > 0)
+	if (ft_listsize(*a) > 5)
 		ft_over_five(a, b, 0);
 	else{
+		ft_update_index(*a);
+		if_five(a, b);
 		ft_update_index(*b);
 		if (ft_get_max_pos(b) <= ft_listsize(*b) / 2)
 			while (ft_check_true_rev_sort(b) != 1)
@@ -215,10 +228,24 @@ void	ft_over_five(t_list **a, t_list **b, int flag)
 		else
 			while (ft_check_true_rev_sort(b) != 1)
 				rra_rrb(b, 'b');
+		//printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
+	//	print_list(*a);
 		while (*b)
+		{
+			last_nbr= ft_get_last(a);
+			while (last_nbr < (*a)->content && last_nbr > (*b)->content)
+			{
+				//printf("%d < %d && %d > %d \n", last_nbr , (*a)->content , last_nbr, (*b)->content);
+				rra_rrb(a, 'a');
+				last_nbr = ft_get_last(a);
+			}
+		//	printf("%d < %d && %d > %d \n", last_nbr , (*a)->content , last_nbr, (*b)->content);
 			pa_pb(b, a, 'a');
+		}
+		while(ft_check_true_sort(a) == -1)
+			rra_rrb(a, 'a');//got infinite loops
 	}
-
-
-
 }
+
+
+// #TODO make it so when adding to b to a i will check if the last number on a is between first of a and first of b;
