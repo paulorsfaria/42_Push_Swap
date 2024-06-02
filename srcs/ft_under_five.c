@@ -209,6 +209,7 @@ int	ft_get_last(t_list **a)
 
 void	finish_rev_sort(t_list **b)
 {
+	ft_update_index(*b);
 	if (ft_get_max_pos(b) <= ft_listsize(*b) / 2)
 		while (ft_check_true_rev_sort(b) != 1)
 			ra_rb(b, 'b');

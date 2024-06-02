@@ -54,13 +54,35 @@ for ((i=1; i<=tests; i++)); do
     moves=$(./push_swap $set_str > moves && cat moves | wc -w)
     total_moves=$((total_moves + moves))
 
-    if echo "$output" | grep -q "OK"; then
-        echo -e "\e[32mTest $i passed with $moves moves\e[0m" && echo -e "Test $i passed with $moves moves and numbers: $set_str" >> results
+   # Check if the moves meet the criteria based on quantity
+    case $quantity in
+        5)
+            max_moves=12
+            ;;
+        100)
+            max_moves=700
+            ;;
+        500)
+            max_moves=5500
+            ;;
+        *)
+            max_moves=10000 # Default value for other quantities, adjust as necessary
+            ;;
+    esac
+
+    if [ $moves -le $max_moves ]; then
+        if echo "$output" | grep -q "OK"; then
+            echo -e "\e[32mTest $i passed with $moves moves\e[0m" && echo -e "Test $i passed with $moves moves and numbers: $set_str" >> results
+        else
+            ((failed_tests++))
+            echo -e "\e[31mTest $i failed:\e[0m push_swap $set_str" && echo "Test $i failed with $moves moves: push_swap $set_str" >> results
+        fi
     else
-         ((failed_tests++))
-        echo -e "\e[31mTest $i failed:\e[0m push_swap $set_str" && echo "Test $i failed with $moves moves: push_swap $set_str" >> results
+        ((failed_tests++))
+        echo -e "\e[31mTest $i failed due to excessive moves ($moves > $max_moves)\e[0m" && echo "Test $i failed due to excessive moves ($moves > $max_moves): push_swap $set_str" >> results
     fi
 done
+
     average_moves=$(echo "scale=2; $total_moves / $tests" | bc)
     echo "Total moves: $total_moves Average moves: $average_moves"
     echo "Number of failed tests: $failed_tests" | tee -a results
