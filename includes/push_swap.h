@@ -63,5 +63,4 @@ void	if_five(t_list **a, t_list **b);
 void	ft_over_five(t_list **a, t_list **b, int flag);
 void	ft_sort(t_list **a, t_list **b);
 void	ft_get_target(t_list *a, t_list *b);
-void	ft_get_cost_b(t_list *b);
 #endif

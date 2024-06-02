@@ -49,9 +49,11 @@ failed_tests=(0)
 median_moves=(0)
 for ((i=1; i<=tests; i++)); do
     set_str=$(generate_unique_set)
+       # echo "testing with $set_str\n";
     output=$(./push_swap $set_str | ./checker_linux $set_str)
     moves=$(./push_swap $set_str > moves && cat moves | wc -w)
     total_moves=$((total_moves + moves))
+
     if echo "$output" | grep -q "OK"; then
         echo -e "\e[32mTest $i passed with $moves moves\e[0m" && echo -e "Test $i passed with $moves moves and numbers: $set_str" >> results
     else

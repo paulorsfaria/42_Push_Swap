@@ -16,6 +16,7 @@ void	ft_sort(t_list **a, t_list **b)
 {
 	int	size;
 
+	ft_update_index(*a);
 	size = ft_listsize(*a);
 	if (size == 2)
 		sa_sb(a, 'a');

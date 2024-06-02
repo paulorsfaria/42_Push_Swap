@@ -6,7 +6,7 @@
 /*   By: paulo-do <paulo-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:53:02 by paulo-do          #+#    #+#             */
-/*   Updated: 2024/05/29 13:22:34 by paulo-do         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:05:59 by paulo-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int argc, char *argv[])
 		ft_update_index(a);
 		ft_update_index(b);
 		ft_sort(&a, &b);
-	//	print_list(a);
 		ft_free_stack(&a);
 	}
 }

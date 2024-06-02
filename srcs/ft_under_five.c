@@ -14,7 +14,7 @@
 
 void	if_three(t_list **a)
 {
-	if (ft_check_true_sort(a) != 0)
+	if (ft_check_true_sort(a) != 1)
 	{
 		if (ft_get_max_pos(a) == 0)
 		{
@@ -114,27 +114,21 @@ void	ft_both_equal(t_list **a, t_list **b, int goal, bool flag)
 		temp_a = temp_a->next;
 	if (flag == true)
 	{
-		while ((*a)->index != goal && temp_a->target->index != (*b)->index)
-			both(a, b, 'r');
-		if ((*a)->index != goal || (*b)->index != (*a)->target->index)
-		{
+		if ((*a)->index != goal)
 			while ((*a)->index != goal)
 				ra_rb(a, 'a');
+		if ((*b)->index != (*a)->target->index)
 			while ((*b)->index != (*a)->target->index)
 				ra_rb(b, 'b');
-		}
 	}
 	else if (flag == false)
 	{
-		while ((*a)->index != goal && temp_a->target->index != (*b)->index)
-			both(a, b, 'u');
-		if ((*a)->index != goal || (*b)->index != (*a)->target->index)
-		{
+		if ((*a)->index != goal)
 			while ((*a)->index != goal)
 				rra_rrb(a, 'a');
+		if ((*b)->index != (*a)->target->index)
 			while ((*b)->index != (*a)->target->index)
 				rra_rrb(b, 'b');
-		}
 	}
 	pa_pb(a, b, 'b');
 }
@@ -156,7 +150,6 @@ void	ft_if_dif(t_list **a, t_list **b, int goal, bool flag)
 			ra_rb(b, 'b');
 	}
 	pa_pb(a, b, 'b');
-
 }
 
 void	ft_prepare_for_push(t_list **a, t_list **b)
@@ -175,7 +168,15 @@ void	ft_prepare_for_push(t_list **a, t_list **b)
 	while (temp->index != goal)
 		temp = temp->next;
 	if (temp->median == temp->target->median)
+	{
+		if (temp->median == true)
+			while ((*a)->index != goal && temp->target->index != (*b)->index)
+				both(a, b, 'r');
+		else
+			while ((*a)->index != goal && temp->target->index != (*b)->index)
+				both(a, b, 'u');
 		ft_both_equal(a, b, goal, temp->median);
+	}
 	else
 		ft_if_dif(a, b, goal, temp->median);
 }
@@ -184,32 +185,58 @@ int	ft_check_true_rev_sort(t_list **lst)
 {
 	t_list	*temp;
 
-	temp = (*lst);
-	while (temp->next->next != NULL)
+	if (*lst == NULL || (*lst)->next == NULL)
+		return (1);
+	temp = *lst;
+	while (temp->next != NULL)
 	{
 		if (temp->content < temp->next->content)
 			return (-1);
 		temp = temp->next;
 	}
-	if (temp->content < temp->next->content)
-		return (-1);
 	return (1);
 }
-int ft_get_last(t_list **a)
+
+int	ft_get_last(t_list **a)
 {
-	t_list *temp;
+	t_list	*temp;
+
 	temp = *a;
 	while (temp->next)
-		temp=temp->next;
+		temp = temp->next;
 	return (temp->content);
+}
 
+void	finish_rev_sort(t_list **b)
+{
+	if (ft_get_max_pos(b) <= ft_listsize(*b) / 2)
+		while (ft_check_true_rev_sort(b) != 1)
+			ra_rb(b, 'b');
+	else
+		while (ft_check_true_rev_sort(b) != 1)
+			rra_rrb(b, 'b');
+}
+
+void	finish_sort(t_list **a, t_list **b)
+{
+	ft_sort(a, b);
+	finish_rev_sort(b);
+	if (ft_get_last(a) > (*b)->content)
+	{
+		rra_rrb(a, 'a');
+		pa_pb(a, b, 'b');
+	}
+	while (*b)
+	{
+		while (ft_get_last(a) < (*a)->content
+			&& ft_get_last(a) > (*b)->content)
+			rra_rrb(a, 'a');
+		pa_pb(b, a, 'a');
+	}
 }
 
 void	ft_over_five(t_list **a, t_list **b, int flag)
 {
-	int last_nbr;
-	last_nbr = INT_MIN;
-
 	if (flag == 1)
 	{
 		pa_pb(a, b, 'b');
@@ -218,34 +245,10 @@ void	ft_over_five(t_list **a, t_list **b, int flag)
 	ft_prepare_for_push(a, b);
 	if (ft_listsize(*a) > 5)
 		ft_over_five(a, b, 0);
-	else{
-		ft_update_index(*a);
-		if_five(a, b);
-		ft_update_index(*b);
-		if (ft_get_max_pos(b) <= ft_listsize(*b) / 2)
-			while (ft_check_true_rev_sort(b) != 1)
-				ra_rb(b, 'b');
-		else
-			while (ft_check_true_rev_sort(b) != 1)
-				rra_rrb(b, 'b');
-		//printf("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n");
-	//	print_list(*a);
-		while (*b)
-		{
-			last_nbr= ft_get_last(a);
-			while (last_nbr < (*a)->content && last_nbr > (*b)->content)
-			{
-				//printf("%d < %d && %d > %d \n", last_nbr , (*a)->content , last_nbr, (*b)->content);
-				rra_rrb(a, 'a');
-				last_nbr = ft_get_last(a);
-			}
-		//	printf("%d < %d && %d > %d \n", last_nbr , (*a)->content , last_nbr, (*b)->content);
-			pa_pb(b, a, 'a');
-		}
-		while(ft_check_true_sort(a) == -1)
-			rra_rrb(a, 'a');//got infinite loops
+	else
+	{
+		finish_sort(a, b);
+		while (ft_check_true_sort(a) == -1)
+			rra_rrb(a, 'a');
 	}
 }
-
-
-// #TODO make it so when adding to b to a i will check if the last number on a is between first of a and first of b;
