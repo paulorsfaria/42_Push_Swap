@@ -70,20 +70,31 @@ void	ft_get_target(t_list *a, t_list *b)
 	}
 }
 
-void	ft_get_cost(t_list *a, int len_b)
+void	ft_get_cost(t_list *a, int len_a, int len_b)
 {
-	int	len_a;
-
-	len_a = ft_listsize(a);
 	while (a)
 	{
-		a->cost = a->index;
-		if (a->median == false)
-			a->cost = len_a - (a->index);
-		if (a->target->median == true)
-			a->cost += a->target->index;
+		if (a->median == a->target->median)
+		{
+			if (a->median == true)
+			{
+				if (a->index > a->target->index)
+					a->cost = a->index;
+				else
+					a->cost = a->target->index;
+			}
+			else if ((len_a - a->index) > (len_b - a->target->index))
+				a->cost = (len_a - a->index);
+			else if ((len_a - a->index) < (len_b - a->target->index))
+				a->cost = (len_b - a->target->index);
+		}
 		else
-			a->cost += len_b - (a->target->index);
+		{
+			if (a->median)
+				a->cost = a->index + len_b - a->target->index;
+			else
+				a->cost = len_a - a->index + a->target->index;
+		}
 		a = a->next;
 	}
 }

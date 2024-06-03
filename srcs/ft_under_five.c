@@ -107,11 +107,7 @@ int	ft_find_cheapest(t_list *a)
 
 void	ft_both_equal(t_list **a, t_list **b, int goal, bool flag)
 {
-	t_list	*temp_a;
 
-	temp_a = *a;
-	while (temp_a->index != goal)
-		temp_a = temp_a->next;
 	if (flag == true)
 	{
 		if ((*a)->index != goal)
@@ -163,7 +159,7 @@ void	ft_prepare_for_push(t_list **a, t_list **b)
 	ft_update_index(*a);
 	ft_update_index(*b);
 	ft_get_target(*a, *b);
-	ft_get_cost(*a, ft_listsize(*b));
+	ft_get_cost(*a, ft_listsize(*a), ft_listsize(*b));
 	goal = ft_find_cheapest(*a);
 	while (temp->index != goal)
 		temp = temp->next;

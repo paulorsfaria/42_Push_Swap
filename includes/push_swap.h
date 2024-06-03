@@ -53,7 +53,7 @@ int		ft_get_max_pos(t_list **a);
 int		ft_get_min_pos(t_list **a);
 int		ft_check_true_sort(t_list **lst);
 void	ft_update_index(t_list *lst);
-void	ft_get_cost(t_list *a, int len_b);
+void	ft_get_cost(t_list *a, int	len_a,int len_b);
 
 //sorting
 void	print_list(t_list *head);
