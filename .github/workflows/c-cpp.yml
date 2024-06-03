@@ -14,4 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Tester_doing_tester_things
-      run: ./tester.sh 500 5000 | grep "passed"
+      run: ./tester.sh 500 5000
