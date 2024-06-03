@@ -34,5 +34,7 @@ jobs:
       run: ./tester.sh 9 5000 | grep "failed"
     - name: Tester_doing_tester_things 10
       run: ./tester.sh 10 5000 | grep "failed"
+    - name: Tester_doing_tester_things 100
+      run: ./tester.sh 100 10000 | grep "failed"
     - name: Tester_doing_tester_things 500
-      run: ./tester.sh 500 5000 | grep "failed"
+      run: ./tester.sh 500 10000 | grep "failed"
