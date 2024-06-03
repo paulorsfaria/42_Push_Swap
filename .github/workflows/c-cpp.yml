@@ -13,5 +13,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Tester_doing_tester_things
+    
+    - name: Tester_doing_tester_things 1
+      run: ./tester.sh 1 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 2
+      run: ./tester.sh 2 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 3
+      run: ./tester.sh 3 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 4
+      run: ./tester.sh 4 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 5
+      run: ./tester.sh 5 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 6
+      run: ./tester.sh 6 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 7
+      run: ./tester.sh 7 5000 | grep "failed"    
+    - name: Tester_doing_tester_things 8
+      run: ./tester.sh 8 5000 | grep "failed"
+    - name: Tester_doing_tester_things 9
+      run: ./tester.sh 9 5000 | grep "failed"
+    - name: Tester_doing_tester_things 10
+      run: ./tester.sh 10 5000 | grep "failed"
+    - name: Tester_doing_tester_things 500
       run: ./tester.sh 500 5000 | grep "failed"
