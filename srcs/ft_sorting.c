@@ -12,36 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-void	ft_sort(t_list **a, t_list **b)
-{
-	int	size;
-
-	ft_update_index(*a);
-	size = ft_listsize(*a);
-	if (size == 2)
-		sa_sb(a, 'a');
-	else if (size == 3)
-		if_three(a);
-	else if (size == 4)
-		if_four(a, b);
-	else if (size == 5)
-		if_five(a, b);
-	else
-		ft_over_five(a, b, 1);
-}
-
-t_list	*ft_get_max(t_list **lst)
-{
-	t_list	*temp;
-	int		target;
-
-	target = ft_get_max_pos(lst);
-	temp = (*lst);
-	while (target != temp->index)
-		temp = temp->next;
-	return (temp);
-}
-
 void	ft_get_target(t_list *a, t_list *b)
 {
 	t_list		*temp_b;
@@ -97,4 +67,27 @@ void	ft_get_cost(t_list *a, int len_a, int len_b)
 		}
 		a = a->next;
 	}
+}
+
+int	ft_find_cheapest(t_list *a)
+{
+	t_list	*temp;
+	int		cost;
+	int		index;
+
+	index = 0;
+	temp = a;
+	cost = INT_MAX;
+	while (temp)
+	{
+		if (cost > temp->cost)
+		{
+			cost = temp->cost;
+			index = temp->index;
+			if (cost == 0)
+				return (index);
+		}
+		temp = temp->next;
+	}
+	return (index);
 }

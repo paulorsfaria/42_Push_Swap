@@ -29,13 +29,11 @@ typedef struct s_list
 
 // Validations
 int		ft_split_validate(t_list **a, char *argv[]);
+int		ft_check_sort(int c, char *argv[]);
 int		ft_validate_args(int c, char *argv[]);
 int		ft_check_dups(int c, char *argv[]);
-int		ft_check_sort(int c, char *argv[]);
-
-//Free split and struct
-void	ft_free_split(char **s, int i);
-void	ft_free_stack(t_list **a);
+int		ft_check_true_rev_sort(t_list **lst);
+int		ft_check_true_sort(t_list **lst);
 
 //Initialize list
 void	ft_init_list(t_list **a, int size, char *argv[]);
@@ -48,19 +46,20 @@ void	rra_rrb(t_list **lst, char letter);
 void	both(t_list **a, t_list **b, char letter);
 
 // Utils
-int		ft_listsize(t_list *lst);
-int		ft_get_max_pos(t_list **a);
 int		ft_get_min_pos(t_list **a);
-int		ft_check_true_sort(t_list **lst);
+int		ft_get_last(t_list **a);
+int		error_center(int error);
+int		ft_get_max_pos(t_list **a);
 void	ft_update_index(t_list *lst);
-void	ft_get_cost(t_list *a, int	len_a,int len_b);
+int		ft_listsize(t_list *lst);
+t_list	*ft_get_max(t_list **lst);
 
 //sorting
-void	print_list(t_list *head);
-void	if_three(t_list **a);
-void	if_four(t_list **a, t_list **b);
-void	if_five(t_list **a, t_list **b);
-void	ft_over_five(t_list **a, t_list **b, int flag);
+
 void	ft_sort(t_list **a, t_list **b);
 void	ft_get_target(t_list *a, t_list *b);
+void	ft_get_cost(t_list *a, int len_a, int len_b);
+int		ft_find_cheapest(t_list *a);
+void	ft_prepare_for_push(t_list **a, t_list **b);
+void	finish_sort(t_list **a, t_list **b);
 #endif

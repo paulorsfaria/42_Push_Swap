@@ -4,10 +4,10 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -fr
 LIBFT = ./libraries/libft
 
-SRCS = srcs/main.c srcs/ft_validate.c srcs/ft_freedom.c \
-		srcs/ft_init.c srcs/ft_movements.c srcs/ft_sorting.c \
-		srcs/ft_utils.c srcs/ft_split_and_init.c \
-		srcs/ft_under_five.c
+SRCS = srcs/ft_movements.c srcs/ft_stack_validations.c srcs/ft_validate.c \
+       srcs/ft_finishing_sort.c srcs/ft_sorting.c srcs/ft_under_five.c srcs/main.c \
+       srcs/ft_init.c srcs/ft_split_and_init.c srcs/ft_utils.c
+
 
 OBJS = ${SRCS:.c=.o}
 

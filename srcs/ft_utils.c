@@ -90,17 +90,3 @@ int	ft_get_min_pos(t_list **a)
 	}
 	return (index);
 }
-
-int	ft_check_true_sort(t_list **lst)
-{
-	t_list	*temp;
-
-	temp = *lst;
-	while (temp->next != NULL)
-	{
-		if (temp->content > temp->next->content)
-			return (-1);
-		temp = temp->next;
-	}
-	return (1);
-}

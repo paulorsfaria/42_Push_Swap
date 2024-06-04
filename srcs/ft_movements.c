@@ -6,7 +6,7 @@
 /*   By: paulo-do <paulo-do@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:52:39 by paulo-do          #+#    #+#             */
-/*   Updated: 2024/05/27 17:08:13 by paulo-do         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:37:25 by paulo-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,6 @@ void	sa_sb(t_list **lst, char letter)
 	(*lst)->next->content = temp;
 	if (letter == 'a' || letter == 'b')
 		ft_printf("s%c\n", letter);
-}
-
-void	both(t_list **a, t_list **b, char letter)
-{
-	if (!a || !*b || !letter)
-		return ;
-	if (letter == 's')
-	{
-		sa_sb(a, 'n');
-		sa_sb(b, 'n');
-		ft_printf("ss\n");
-	}
-	else if (letter == 'r')
-	{
-		ra_rb(a, 'n');
-		ra_rb(b, 'n');
-		ft_printf("rr\n");
-	}
-	else if (letter == 'u')
-	{
-		rra_rrb(a, 'n');
-		rra_rrb(b, 'n');
-		ft_printf("rrr\n");
-	}
 }
 
 void	pa_pb(t_list **origin, t_list **dest, char letter)
@@ -93,4 +69,28 @@ void	rra_rrb(t_list **lst, char letter)
 	last_node->next = NULL;
 	if (letter == 'a' || letter == 'b')
 		ft_printf("rr%c\n", letter);
+}
+
+void	both(t_list **a, t_list **b, char letter)
+{
+	if (!a || !*b || !letter)
+		return ;
+	if (letter == 's')
+	{
+		sa_sb(a, 'n');
+		sa_sb(b, 'n');
+		ft_printf("ss\n");
+	}
+	else if (letter == 'r')
+	{
+		ra_rb(a, 'n');
+		ra_rb(b, 'n');
+		ft_printf("rr\n");
+	}
+	else if (letter == 'u')
+	{
+		rra_rrb(a, 'n');
+		rra_rrb(b, 'n');
+		ft_printf("rrr\n");
+	}
 }

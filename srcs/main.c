@@ -12,15 +12,15 @@
 
 #include "../includes/push_swap.h"
 
-void	print_list(t_list *head)
+void	ft_free_stack(t_list **a)
 {
-	while (head)
+	t_list	*temp;
+
+	while ((*a))
 	{
-		if (head->content)
-			printf("Element: %d -> index: %d \n", head->content, head->index);
-		else
-			printf("Element: %d -> Target: NULL\n", head->content);
-		head = head->next;
+		temp = (*a);
+		(*a) = (*a)->next;
+		free(temp);
 	}
 }
 
