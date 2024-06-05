@@ -27,6 +27,7 @@ void	ft_init_list(t_list **a, int size, char *argv[])
 		temp->content = ft_atoi(argv[i]);
 		temp->index = i + 1;
 		temp->target = NULL;
+		temp->cost = 0;
 		if (i + 1 < size)
 		{
 			temp->next = (t_list *)malloc(sizeof(t_list));
