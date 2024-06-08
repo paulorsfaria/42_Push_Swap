@@ -14,7 +14,7 @@
 
 int	error_center(int error)
 {
-	if (error == 1 || error == 2)
+	if (error == 1)
 		write(2, "Error\n", 6);
 	return (-1);
 }
@@ -30,7 +30,7 @@ int	ft_check_dups(int c, char *argv[])
 	while (i < c)
 	{
 		temp = ft_atoi_long(argv[i]);
-		if (temp > -2147483648 && temp < 2147483647)
+		if (temp >= -2147483648 && temp <= 2147483647)
 		{
 			while (pos < i)
 			{
@@ -65,7 +65,7 @@ int	ft_validate_args(int c, char *argv[])
 		while (argv[j][i] != '\0')
 		{
 			if (ft_isdigit(argv[j][i]) == 0 || i >= 12)
-				return (error_center(2));
+				return (error_center(1));
 			i++;
 		}
 		i = 0;

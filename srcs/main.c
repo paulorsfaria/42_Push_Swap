@@ -44,8 +44,8 @@ int	main(int argc, char *argv[])
 	if (a)
 	{
 		ft_update_index(a);
-		ft_update_index(b);
 		ft_sort(&a, &b);
 		ft_free_stack(&a);
 	}
+	return (0);
 }
