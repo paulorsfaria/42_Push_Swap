@@ -29,7 +29,9 @@ char	*trim_stash(char *stash)
 	}
 	temp_stash = (char *)malloc(sizeof(char) *(ft_strlen(stash) - i + 1));
 	if (!temp_stash)
+	{
 		return (NULL);
+	}
 	if (stash[i] == '\n')
 		i++;
 	while (stash[i] != '\0')
