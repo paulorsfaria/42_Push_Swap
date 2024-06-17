@@ -33,7 +33,6 @@ void	pa_pb(t_list **origin, t_list **dest)
 	(*origin) = (*origin)->next;
 	temp->next = *dest;
 	(*dest) = temp;
-
 }
 
 void	ra_rb(t_list **lst)

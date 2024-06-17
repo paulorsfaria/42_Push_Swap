@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-
 #include "../includes/push_swap_bonus.h"
 
 void	ft_init_list(t_list **a, int size, char *argv[])

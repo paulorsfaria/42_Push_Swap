@@ -12,6 +12,16 @@
 
 #include "../../includes/get_next_line.h"
 
+static char	*check_new_line(char *line)
+{
+	if (line[0] == '\0')
+	{
+		free (line);
+		line = 0;
+	}
+	return (line);
+}
+
 char	*trim_stash(char *stash)
 {
 	int		i;
@@ -27,17 +37,16 @@ char	*trim_stash(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	temp_stash = (char *)malloc(sizeof(char) *(ft_strlen(stash) - i + 1));
+	temp_stash = (char *)malloc(sizeof(char) * (ft_strlen(stash) - i + 1));
 	if (!temp_stash)
-	{
 		return (NULL);
-	}
 	if (stash[i] == '\n')
 		i++;
 	while (stash[i] != '\0')
 		temp_stash[j++] = stash[i++];
 	temp_stash[j] = '\0';
 	free(stash);
+	temp_stash = check_new_line(temp_stash);
 	return (temp_stash);
 }
 

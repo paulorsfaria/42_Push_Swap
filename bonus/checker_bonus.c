@@ -6,7 +6,7 @@
 /*   By: paulo-do <paulo-do@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:43:11 by paulo-do          #+#    #+#             */
-/*   Updated: 2024/06/15 05:56:01 by paulo-do         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:41:07 by paulo-do         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,16 @@ int	do_moves(t_list *a, t_list *b, char *str)
 	else if (!ft_strncmp(str, "rrb\n", 4))
 		rra_rrb(&b);
 	else if (!ft_strncmp(str, "ss\n", 3))
-		both(&a, &b,'s');
+		both(&a, &b, 's');
 	else if (!ft_strncmp(str, "rr\n", 3))
 		both(&a, &b, 'r');
 	else if (!ft_strncmp(str, "rrr\n", 4))
 		both(&a, &b, 'u');
 	else
-	{
-		write(2, "Error\n", 6);
 		return (-1);
-	}
 	return (1);
 }
+
 int	ft_listsize(t_list *lst)
 {
 	int	i;
@@ -70,15 +68,16 @@ int	ft_listsize(t_list *lst)
 	return (i);
 }
 
-void ft_get_inputs(t_list *a, t_list *b)
+void	ft_get_inputs(t_list *a, t_list *b)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(0);
-	while(line != NULL)
+	while (line != NULL)
 	{
-		if(do_moves(a, b, line) == -1)
+		if (do_moves(a, b, line) == -1)
 		{
+			write(2, "Error\n", 6);
 			ft_free_stack(&a);
 			ft_free_stack(&b);
 			free(line);
@@ -88,20 +87,19 @@ void ft_get_inputs(t_list *a, t_list *b)
 		line = get_next_line(0);
 	}
 	free(line);
-	if(ft_check_true_sort(&a) == 1 && ft_listsize(b) == 0)
+	if (ft_check_true_sort(&a) == 1 && ft_listsize(b) == 0)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_list	*a;
 	t_list	*b;
 
 	a = NULL;
 	b = NULL;
-
 	argc--;
 	if (argc == 0)
 		return (1);
