@@ -29,7 +29,7 @@ int		ft_check_sort(int c, char *argv[]);
 int		ft_validate_args(int c, char *argv[]);
 int		ft_check_dups(int c, char *argv[]);
 int		ft_check_true_sort(t_list **lst);
-int	error_center(int error);
+int		error_center(int error);
 
 //Initialize list
 void	ft_init_list(t_list **a, int size, char *argv[]);
