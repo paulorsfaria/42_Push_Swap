@@ -26,7 +26,7 @@ ${NAME_BONUS}:${OBJS_BONUS}
 		cp ${LIBFT}/libft.a .
 		${CC} ${OBJS_BONUS} libft.a -o ${NAME_BONUS}
 
-bonus: ${NAME_BONUS}
+bonus:	${NAME_BONUS}
 
 clean:
 		${MAKE} --no-print-directory clean -C ${LIBFT}
@@ -39,7 +39,7 @@ fclean: clean
 		rm -fr ${NAME}
 		rm -fr ${NAME_BONUS}
 
-all: ${NAME}
+all: ${NAME} ${NAME_BONUS}
 
 re: fclean all
 

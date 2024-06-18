@@ -83,7 +83,8 @@ char	*get_next_line(int fd)
 	static char	*stash[FOPEN_MAX];
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd > FOPEN_MAX)
+	if (BUFFER_SIZE <= 0 || fd < 0
+		|| fd > FOPEN_MAX)
 		return (NULL);
 	stash[fd] = read_file(fd, stash[fd]);
 	if (!stash[fd])

@@ -91,7 +91,6 @@ void	ft_get_inputs(t_list **a, t_list **b)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-
 }
 
 int	main(int argc, char *argv[])
@@ -110,7 +109,6 @@ int	main(int argc, char *argv[])
 		if (ft_validate_args(argc, argv + 1) == 1
 			&& ft_check_dups(argc, argv + 1) == 1)
 			ft_init_list(&a, argc, argv + 1);
-
 	if (a)
 	{
 		ft_get_inputs(&a, &b);
