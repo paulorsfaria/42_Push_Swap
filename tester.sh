@@ -70,9 +70,15 @@ for ((i=1; i<=tests; i++)); do
             ;;
     esac
 
-    if [ $moves -le $max_moves ]; then
+ if [ $moves -le $max_moves ]; then
         if echo "$output" | grep -q "OK"; then
-            echo -e "\e[32mTest $i passed with $moves moves\e[0m" && echo -e "Test $i passed with $moves moves and numbers: $set_str" >> results
+            sorted=$(echo "$sorted_output" | tr ' ' '\n' | sort -n | tr '\n' ' ')
+            if is_sorted $sorted; then
+                echo -e "\e[32mTest $i passed with $moves moves\e[0m" && echo -e "Test $i passed with $moves moves and numbers: $set_str" >> results
+            else
+                ((failed_tests++))
+                echo -e "\e[31mTest $i failed: not sorted after moves\e[0m push_swap $set_str" && echo "Test $i failed with $moves moves: not sorted after moves: push_swap $set_str" >> results
+            fi
         else
             ((failed_tests++))
             echo -e "\e[31mTest $i failed:\e[0m push_swap $set_str" && echo "Test $i failed with $moves moves: push_swap $set_str" >> results
